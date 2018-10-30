@@ -33,4 +33,21 @@ class NumeralsTest extends TestCase
         $this->assertEquals('IX', Numerals::toRoman(9));
         $this->assertEquals('X', Numerals::toRoman(10));
     }
+
+    /**
+     * @test
+     */
+    public function moreTensArabToRoman()
+    {
+        $this->assertEquals('XI', Numerals::toRoman(11));
+        $this->assertEquals('XII', Numerals::toRoman(12));
+        $this->assertEquals('XIII', Numerals::toRoman(13));
+        $this->assertEquals('XIV', Numerals::toRoman(14));
+        $this->assertEquals('XV', Numerals::toRoman(15));
+        $this->assertEquals('XVI', Numerals::toRoman(16));
+        $this->assertEquals('XVII', Numerals::toRoman(17));
+        $this->assertEquals('XVIII', Numerals::toRoman(18));
+        $this->assertEquals('XIX', Numerals::toRoman(19));
+        $this->assertEquals('XX', Numerals::toRoman(20));
+    }
 }
