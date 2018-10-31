@@ -5,12 +5,20 @@ namespace Numerals;
 class Numerals
 {
 
-    const ARAB_TO_ROMAN_TABLE = [
-        1  => 'I',
-        4  => 'IV',
-        5  => 'V',
-        9  => 'IX',
-        10 => 'X'
+    const ARAB_ROMAN_TABLE = [
+        1000 => 'M',
+        900  => 'CM',
+        500  => 'D',
+        400  => 'CD',
+        100  => 'C',
+        90   => 'XC',
+        50   => 'L',
+        40   => 'XL',
+        10   => 'X',
+        9    => 'IX',
+        5    => 'V',
+        4    => 'IV',
+        1    => 'I',
     ];
 
     /**
@@ -24,14 +32,13 @@ class Numerals
             return false;
         }
 
-        if (isset(self::ARAB_TO_ROMAN_TABLE[$arabNumeral])) {
-            return self::ARAB_TO_ROMAN_TABLE[$arabNumeral];
+        if (isset(self::ARAB_ROMAN_TABLE[$arabNumeral])) {
+            return self::ARAB_ROMAN_TABLE[$arabNumeral];
         }
 
-        $result       = '';
-        $numbersTable = array_reverse(self::ARAB_TO_ROMAN_TABLE, true);
+        $result = '';
 
-        foreach ($numbersTable as $arabKey => $romanNumeral) {
+        foreach (self::ARAB_ROMAN_TABLE as $arabKey => $romanNumeral) {
             for (; $arabNumeral >= $arabKey; $arabNumeral -= $arabKey) {
                 $result .= $romanNumeral;
             }

@@ -50,4 +50,22 @@ class NumeralsTest extends TestCase
         $this->assertEquals('XIX', Numerals::toRoman(19));
         $this->assertEquals('XX', Numerals::toRoman(20));
     }
+
+    /**
+     * @test
+     */
+    public function complexArabToRoman()
+    {
+        $this->assertEquals('XXX', Numerals::toRoman(30));
+        $this->assertEquals('XXXIX', Numerals::toRoman(39));
+        $this->assertEquals('XL', Numerals::toRoman(40));
+        $this->assertEquals('XLIV', Numerals::toRoman(44));
+        $this->assertEquals('XLIX', Numerals::toRoman(49));
+        $this->assertEquals('L', Numerals::toRoman(50));
+        $this->assertEquals('LXXVIII', Numerals::toRoman(78));
+        $this->assertEquals('XCIX', Numerals::toRoman(99));
+
+        $this->assertEquals('MCMXCII', Numerals::toRoman(1992));
+        $this->assertEquals('MMXVIII', Numerals::toRoman(2018));
+    }
 }
