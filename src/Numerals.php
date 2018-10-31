@@ -61,17 +61,16 @@ class Numerals
 
         $result = 0;
 
-        for ($strPosition = 0; $strPosition < strlen($romanNumeral); $strPosition++) {
-            $candidate = array_search($romanNumeral[$strPosition], self::ARAB_ROMAN_TABLE);
+        for ($numeralIndex = 0; $numeralIndex < strlen($romanNumeral); $numeralIndex++) {
+            $numeralCharacter = $romanNumeral[$numeralIndex];
+            if ($romanNumeral[$numeralIndex] < $romanNumeral[$numeralIndex + 1]) {
+                $numeralCharacter .= $romanNumeral[$numeralIndex + 1];
+                $numeralIndex++;
+            }
 
-            if ($candidate) {
-                if ($romanNumeral[$strPosition+1] > $romanNumeral[$strPosition]) {
-                    $nextCandidate = array_search($romanNumeral[$strPosition] . $romanNumeral[$strPosition+1], self::ARAB_ROMAN_TABLE);
-                    $result += $nextCandidate;
-                    $strPosition++;
-                } else {
-                    $result += $candidate;
-                }
+            $wantedNumber = array_search($numeralCharacter, self::ARAB_ROMAN_TABLE);
+            if ($wantedNumber) {
+                $result += $wantedNumber;
             }
         }
 
