@@ -26,7 +26,7 @@ class Numerals
      *
      * @return bool|string
      */
-    public function toRoman($arabNumeral)
+    public function toRoman(int $arabNumeral)
     {
         if ($arabNumeral < 1) {
             return false;
@@ -53,7 +53,7 @@ class Numerals
      *
      * @return bool|int
      */
-    public function toArab($romanNumeral)
+    public function toArab(string $romanNumeral)
     {
         if (empty($romanNumeral)) {
             return false;
@@ -83,7 +83,7 @@ class Numerals
      *
      * @return bool
      */
-    private function isNextCharacterBiggerThanCurrent($currentCharacter, $nextCharacter)
+    private function isNextCharacterBiggerThanCurrent(string $currentCharacter, string $nextCharacter): bool
     {
         $currentNumber = $this->getArabFromRoman($currentCharacter);
         $nextNumber    = $this->getArabFromRoman($nextCharacter);
@@ -96,7 +96,7 @@ class Numerals
      *
      * @return false|int
      */
-    private function getArabFromRoman($romanNumeral)
+    private function getArabFromRoman(string $romanNumeral)
     {
         return array_search($romanNumeral, self::ARAB_ROMAN_TABLE);
     }
