@@ -46,4 +46,36 @@ class Numerals
 
         return $result;
     }
+
+
+    /**
+     * @param $romanNumeral
+     *
+     * @return bool|int
+     */
+    public static function toArab($romanNumeral)
+    {
+        if (empty($romanNumeral)) {
+            return false;
+        }
+
+        $result = 0;
+
+        for ($strPosition = 0; $strPosition < strlen($romanNumeral); $strPosition++) {
+            $candidate = array_search($romanNumeral[$strPosition], self::ARAB_ROMAN_TABLE);
+
+            if ($candidate) {
+                if ($romanNumeral[$strPosition+1] > $romanNumeral[$strPosition]) {
+                    $nextCandidate = array_search($romanNumeral[$strPosition] . $romanNumeral[$strPosition+1], self::ARAB_ROMAN_TABLE);
+                    $result += $nextCandidate;
+                    $strPosition++;
+                } else {
+                    $result += $candidate;
+                }
+            }
+        }
+
+        return $result;
+    }
+
 }

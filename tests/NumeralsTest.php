@@ -68,4 +68,29 @@ class NumeralsTest extends TestCase
         $this->assertEquals('MCMXCII', Numerals::toRoman(1992));
         $this->assertEquals('MMXVIII', Numerals::toRoman(2018));
     }
+
+    /**
+     * @test
+     */
+    public function cannotConvertToArabEmptyValue()
+    {
+        $this->assertFalse(Numerals::toArab(''));
+    }
+
+    /**
+     * @test
+     */
+    public function tensRomanToArab()
+    {
+        $this->assertEquals(1, Numerals::toArab('I'));
+        $this->assertEquals(2, Numerals::toArab('II'));
+        $this->assertEquals(3, Numerals::toArab('III'));
+        $this->assertEquals(4, Numerals::toArab('IV'));
+        $this->assertEquals(5, Numerals::toArab('V'));
+        $this->assertEquals(6, Numerals::toArab('VI'));
+        $this->assertEquals(7, Numerals::toArab('VII'));
+        $this->assertEquals(8, Numerals::toArab('VIII'));
+        $this->assertEquals(9, Numerals::toArab('IX'));
+        $this->assertEquals(10, Numerals::toArab('X'));
+    }
 }
