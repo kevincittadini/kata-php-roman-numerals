@@ -26,7 +26,7 @@ class Numerals
      *
      * @return bool|string
      */
-    public static function toRoman($arabNumeral)
+    public function toRoman($arabNumeral)
     {
         if ($arabNumeral < 1) {
             return false;
@@ -53,7 +53,7 @@ class Numerals
      *
      * @return bool|int
      */
-    public static function toArab($romanNumeral)
+    public function toArab($romanNumeral)
     {
         if (empty($romanNumeral)) {
             return false;
@@ -63,12 +63,12 @@ class Numerals
 
         for ($numeralIndex = 0; $numeralIndex < strlen($romanNumeral); $numeralIndex++) {
             $numeralCharacter = $romanNumeral[$numeralIndex];
-            if ($romanNumeral[$numeralIndex] < $romanNumeral[$numeralIndex + 1]) {
+            if ($this->isNextCharacterBiggerThanCurrent($romanNumeral[$numeralIndex], $romanNumeral[$numeralIndex + 1])) {
                 $numeralCharacter .= $romanNumeral[$numeralIndex + 1];
                 $numeralIndex++;
             }
 
-            $wantedNumber = array_search($numeralCharacter, self::ARAB_ROMAN_TABLE);
+            $wantedNumber = $this->getArabFromRoman($numeralCharacter);
             if ($wantedNumber) {
                 $result += $wantedNumber;
             }
@@ -77,4 +77,27 @@ class Numerals
         return $result;
     }
 
+    /**
+     * @param $currentCharacter
+     * @param $nextCharacter
+     *
+     * @return bool
+     */
+    private function isNextCharacterBiggerThanCurrent($currentCharacter, $nextCharacter)
+    {
+        $currentNumber = $this->getArabFromRoman($currentCharacter);
+        $nextNumber    = $this->getArabFromRoman($nextCharacter);
+
+        return $currentNumber < $nextNumber;
+    }
+
+    /**
+     * @param $romanNumeral
+     *
+     * @return false|int
+     */
+    private function getArabFromRoman($romanNumeral)
+    {
+        return array_search($romanNumeral, self::ARAB_ROMAN_TABLE);
+    }
 }
